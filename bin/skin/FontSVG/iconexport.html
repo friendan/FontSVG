@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html theme="chrome" size="420,520" caption="0,0,0,40" min-size="380,460">
+  <VBox name="root">
+    <TitleBar name="titlebar" title="导出图标" height="40"
+      show-min="false" show-max="false" show-close="true" action="title" />
+    <VBox padding="12,16,12,16" gap="10">
+      <HBox height="72" gap="12" align-items="vcenter">
+        <VBox name="preview_plate" width="72" height="72" align-items="center" justify-content="vcenter"
+          background-color="#D8D8D8FF" border="1px solid" border-color="var(--color-border)" border-radius="8">
+          <SvgBox name="preview" width="48" height="48" />
+        </VBox>
+        <VBox gap="4">
+          <Label name="lbl_name" text="" height="22" />
+          <Label name="lbl_lib" text="" height="20" theme="secondary" text-overflow="ellipsis" />
+          <Label text="ICO：七档尺寸写入同一文件（分层），非多个文件" height="18" theme="secondary" />
+        </VBox>
+      </HBox>
+
+      <Label text="颜色" height="22" />
+      <HBox name="color_row" height="36" gap="6" align-items="vcenter" />
+      <HBox height="28" gap="8" align-items="vcenter">
+        <Button name="btn_custom_color" text="自定义…" kind="default" width="88" height="28" />
+        <Label name="lbl_color" text="" theme="secondary" />
+      </HBox>
+      <ColorPalette name="palette" height="160" palette-height="120" bar-height="14"
+        visible="false" />
+
+      <Label text="导出目录" height="22" />
+      <HBox height="28" gap="8" align-items="vcenter">
+        <Label name="lbl_dir" text="" theme="secondary" text-overflow="ellipsis" />
+        <Button name="btn_browse_dir" text="选择目录…" kind="default" width="96" height="28" />
+      </HBox>
+
+      <Control />
+      <HBox height="36" gap="8" align-items="vcenter">
+        <Control />
+        <Button name="btn_cancel" text="取消" kind="default" width="88" height="32" />
+        <Button name="btn_export" text="导出" kind="primary" width="96" height="32" />
+      </HBox>
+    </VBox>
+  </VBox>
+</html>
+<style>
+  html {
+    size: 420,520;
+    caption: 0,0,0,40;
+    min-size: 380,460;
+  }
+</style>

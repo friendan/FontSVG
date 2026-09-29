@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html theme="chrome" size="800,680" caption="0,0,0,40" min-size="720,600" size-box="4,4,6,6">
+  <VBox name="root" window-resize="all">
+    <TitleBar name="titlebar" title="导出头像" height="40"
+      show-min="false" show-max="true" show-close="true" action="title" />
+
+    <VBox padding="16,20,12,20" gap="12" flexible="1">
+      <!-- 居中预览 -->
+      <VBox height="128" align-items="center" justify-content="vcenter">
+        <VBox name="preview_plate" width="120" height="120"
+            align-items="center" justify-content="vcenter"
+            background-color="#E8E8E8FF" border="1px solid" border-color="var(--color-border)"
+            border-radius="12">
+          <SvgBox name="preview" width="96" height="96" />
+        </VBox>
+      </VBox>
+
+      <!-- 选项可滚动，避免色板展开时挤掉底部按钮 -->
+      <VBox flexible="1" overflow-y="auto" gap="10" padding="0,2,0,2">
+        <HBox height="56" gap="16">
+          <VBox flexible="1" gap="6">
+            <Label text="外形" height="20" />
+            <Segmented name="seg_shape" options="圆形:circle|圆角:rounded" selected="circle" height="32" />
+          </VBox>
+          <VBox flexible="1" gap="6">
+            <Label text="格式" height="20" />
+            <Segmented name="seg_format" options="PNG:png|JPG:jpg|BMP:bmp" selected="png" height="32" />
+          </VBox>
+        </HBox>
+        <Label name="lbl_fmt_hint" text="PNG：推荐（透明边缘更干净）" height="18" theme="secondary" />
+
+        <Label text="尺寸（正方形）" height="20" />
+        <HBox height="28" gap="6" align-items="vcenter">
+          <Edit name="edt_size" width="72" height="28" text="256" type="number" maxlength="4" />
+          <Label text="px" width="28" height="28" />
+          <Button name="btn_size_64" text="64" kind="default" width="40" height="28" />
+          <Button name="btn_size_128" text="128" kind="default" width="44" height="28" />
+          <Button name="btn_size_256" text="256" kind="default" width="44" height="28" />
+          <Button name="btn_size_512" text="512" kind="default" width="44" height="28" />
+        </HBox>
+
+        <Label text="字色" height="20" />
+        <HBox height="36" gap="6" align-items="vcenter">
+          <HBox name="fg_row" height="36" gap="6" align-items="vcenter" />
+          <Button name="btn_custom_fg" text="自定义" kind="default" width="64" height="28" />
+          <Label name="lbl_fg" text="" theme="secondary" />
+        </HBox>
+        <ColorPalette name="palette_fg" height="140" palette-height="100" bar-height="14" visible="false" />
+
+        <Label text="底色" height="20" />
+        <HBox height="36" gap="6" align-items="vcenter">
+          <HBox name="bg_row" height="36" gap="6" align-items="vcenter" />
+          <Button name="btn_custom_bg" text="自定义" kind="default" width="64" height="28" />
+          <Label name="lbl_bg" text="" theme="secondary" />
+        </HBox>
+        <ColorPalette name="palette_bg" height="140" palette-height="100" bar-height="14" visible="false" />
+      </VBox>
+
+      <HBox height="36" gap="8" align-items="vcenter">
+        <Control />
+        <Button name="btn_cancel" text="取消" kind="default" width="88" height="32" />
+        <Button name="btn_export" text="导出" kind="primary" width="96" height="32" />
+      </HBox>
+    </VBox>
+  </VBox>
+</html>
+<style>
+  html {
+    size: 800,680;
+    caption: 0,0,0,40;
+    min-size: 720,600;
+    size-box: 4,4,6,6;
+  }
+</style>

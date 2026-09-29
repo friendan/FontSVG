@@ -1,0 +1,101 @@
+<html theme="chrome" size="1280,800" caption="0,0,0,40" min-size="960,600" size-box="4,4,6,6">
+  <!-- HSplit PreferClientHit 会挡住窗口 size-box 的左右缩放；root 开 window-resize 互补 -->
+  <VBox name="root" window-resize="all">
+    <!-- 上：标题栏 -->
+    <TitleBar name="titlebar" title="FontSVG" height="40"
+        show-min="true" show-max="true" show-close="true" action="title">
+      <Spacer />
+      <ThemeSwitcher name="themeSwitch" width="36" height="40"
+          tooltip="选择主题" margin="0,8,0,0" />
+    </TitleBar>
+
+    <!-- 中：左右功能区（可拖分隔条调宽） -->
+    <HSplit name="content" flexible="1" padding="8,8,8,8" sep-size="6">
+      <!-- 左：系统字体列表 -->
+      <VBox name="pane_font" width="420" min-width="280" max-width="720"
+          theme="panel" border-radius="8" padding="10,10,10,10" gap="8">
+        <HBox height="32" align-items="vcenter" gap="8">
+          <Label text="字体列表" font-size="14" font-weight="bold"
+              color="var(--color-text)" />
+          <Spacer />
+          <Button name="btn_open_font" kind="none" lucide="folder-open" width="28" height="28"
+              tooltip="选择字体文件"
+              color="var(--color-text-secondary)" color-hover="var(--color-primary)"
+              background-color-hover="var(--color-bg-hover-medium)" border-radius="6" />
+          <Button name="btn_refresh_font" kind="none" lucide="refresh-cw" width="28" height="28"
+              tooltip="刷新字体"
+              color="var(--color-text-secondary)" color-hover="var(--color-primary)"
+              background-color-hover="var(--color-bg-hover-medium)" border-radius="6" />
+        </HBox>
+        <Segmented name="seg_font_cat" options="系统:system|自带:bundled" selected="system" height="32" />
+        <Edit name="filter_font" height="32" placeholder="搜索字体名称"
+            border="1px solid" border-radius="4" padding="0,8,0,8" />
+        <Label name="label_selected_font" theme="secondary" height="22"
+            text="未选择字体" text-overflow="ellipsis" />
+        <List name="list_font" overflow-y="auto" flexible="1" item-show-row-line="true"
+            item-show-column-line="true" header-show-column-line="true"
+            menu="true" item-right-selected="true"
+            item-color="var(--color-text)"
+            item-color-hover="var(--color-text)"
+            item-color-selected="var(--color-primary)"
+            item-color-disabled="var(--color-text-secondary)"
+            empty-text="无字体" empty-description="切换分类，或刷新 / 打开字体文件">
+          <ListHeader height="30">
+            <ListHeaderItem text="#" width="40" text-align="center" color="var(--color-text)" />
+            <ListHeaderItem text="字体名称" text-align="left" color="var(--color-text)" />
+            <ListHeaderItem text="来源" width="56" text-align="center" color="var(--color-text)" />
+          </ListHeader>
+        </List>
+      </VBox>
+
+      <!-- 右：文字展示 -->
+      <VBox name="pane_chars" min-width="400"
+          theme="panel" border-radius="8" padding="10,10,10,10" gap="8">
+        <HBox height="32" align-items="vcenter" gap="8">
+          <Label text="文字预览" font-size="14" font-weight="bold" width="72"
+              color="var(--color-text)" />
+          <Button name="btn_zoom_in" kind="none" lucide="zoom-in" width="28" height="28"
+              tooltip="放大字号"
+              color="var(--color-text-secondary)" color-hover="var(--color-primary)"
+              background-color-hover="var(--color-bg-hover-medium)" border-radius="6" />
+          <Button name="btn_zoom_out" kind="none" lucide="zoom-out" width="28" height="28"
+              tooltip="缩小字号"
+              color="var(--color-text-secondary)" color-hover="var(--color-primary)"
+              background-color-hover="var(--color-bg-hover-medium)" border-radius="6" />
+          <Edit name="filter_char" height="32" flexible="1" placeholder="过滤字符 / Unicode（如 4E00）"
+              border="1px solid" border-radius="4" padding="0,8,0,8" />
+        </HBox>
+        <VBox name="grid_chars" flexible="1" gap="6"
+            border="1px solid" border-radius="6" padding="6,6,6,6" overflow-y="hidden" />
+        <HBox height="36" align-items="vcenter" gap="8" padding="2,0,0,0">
+          <Label name="label_page_info" theme="secondary" text="—" flexible="1"
+              text-overflow="ellipsis" text-align="left" />
+          <!-- 固定宽度，避免被 Spacer 挤扁导致右侧 Go/输入框被裁切 -->
+          <HBox name="pager_chars" width="460" min-width="460" height="32"
+              align-items="vcenter" gap="6">
+            <Button name="btn_page_prev" text="上一页" width="64" height="28" />
+            <Button name="btn_page_n0" text="1" width="36" height="28" />
+            <Button name="btn_page_n1" text="2" width="36" height="28" />
+            <Button name="btn_page_n2" text="3" width="36" height="28" />
+            <Button name="btn_page_n3" text="4" width="36" height="28" />
+            <Button name="btn_page_n4" text="5" width="36" height="28" />
+            <Button name="btn_page_next" text="下一页" width="64" height="28" />
+            <Edit name="edit_page_goto" width="56" height="28" type="number" placeholder="页码"
+                border="1px solid" border-radius="4" padding="0,6,0,6" />
+            <Button name="btn_page_go" text="Go" width="44" height="28" />
+          </HBox>
+          <!-- 与左侧信息区等分剩余空间，翻页条保持居中 -->
+          <Control flexible="1" />
+        </HBox>
+      </VBox>
+    </HSplit>
+
+    <Control name="status_sep" height="1" background-color="var(--color-border)" />
+
+    <!-- 下：状态栏 -->
+    <HBox name="statusbar" height="28" padding="0,12,0,12" gap="8" align-items="vcenter">
+      <Label name="status_message" theme="secondary" text="就绪" />
+      <Spacer />
+    </HBox>
+  </VBox>
+</html>

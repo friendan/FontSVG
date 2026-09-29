@@ -1,0 +1,3 @@
+#include "resource.h"
+
+IDR_FONTSVG_SKIN ZIPRES "@FONTSVG_SKIN_ZIP_RC_PATH@"

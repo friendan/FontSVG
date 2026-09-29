@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html theme="chrome" size="1000,720" caption="0,0,0,40" min-size="800,560" size-box="4,4,6,6">
+  <VBox name="root" window-resize="all">
+    <TitleBar name="titlebar" title="轮廓修改" height="40"
+      show-min="false" show-max="true" show-close="true" action="title" />
+    <HBox flexible="1" padding="12,12,12,12" gap="12">
+      <VBox flexible="1" gap="8" theme="panel" border-radius="8" padding="10,10,10,10">
+        <HBox height="28" gap="12" align-items="vcenter">
+          <Label text="拖动彩色圆点调整轮廓（红=锚点，蓝=控制点）" theme="secondary"
+              height="22" width="fit-content" />
+          <Switch name="sw_points" text="显示控制点" checked="true" height="28" width="auto" />
+        </HBox>
+        <OutlineCanvas name="canvas" flexible="1"
+            border="1px solid" border-color="var(--color-border)" border-radius="6" />
+        <HBox height="36" gap="8" align-items="vcenter">
+          <Button name="btn_reset" text="重置" kind="default" width="88" height="32" />
+          <Segmented name="seg_intensity" options="轻微:mild|中等:medium|夸张:wild"
+              selected="medium" width="210" height="32" />
+          <Button name="btn_random" text="随机生成 100 个候选" kind="primary" width="168" height="32" />
+        </HBox>
+      </VBox>
+      <VBox width="280" min-width="240" max-width="360" gap="8"
+          theme="panel" border-radius="8" padding="10,10,10,10">
+        <Label text="候选轮廓" font-weight="bold" height="22" color="var(--color-text)" />
+        <Label text="点击缩略图应用到左侧编辑区" theme="secondary" height="20" />
+        <VBox name="cand_host" flexible="1" overflow-y="auto" gap="6"
+            border="1px solid" border-color="var(--color-border)" border-radius="6"
+            padding="6,6,6,6"
+            empty-text="暂无候选" empty-description="点击「随机生成 100 个候选」" />
+      </VBox>
+    </HBox>
+  </VBox>
+</html>
